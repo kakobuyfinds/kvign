@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="theme-color" content="#102e27">
+  <title>CSSBuy spreadsheet | Product Finds, Sizing &amp; QC Guide</title>
+  <meta name="description" content="Browse real HipobuyFind listings, compare reference prices, and use this independent CSSBuy spreadsheet guide to check sizing, QC photos, and shipping costs.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="CSSBuy spreadsheet | Product Finds, Sizing &amp; QC Guide">
+  <meta property="og:description" content="Search a curated product directory and know what to verify before placing an agent order.">
+  <!-- Save as index.html. Once the final public URL is known, add a self-referencing canonical URL.
+       Indexing submission is pending. Publish first, then request indexing in Google Search Console
+       using URL Inspection and submit the public URL in Bing Webmaster Tools using URL Submission.
+       Documentation:
+       https://developers.google.com/search/docs/crawling-indexing/ask-google-to-recrawl
+       https://www.bing.com/webmasters/help/URL-Submission-62f2860b
+
+       Search results reviewed for CSSBuy spreadsheet:
+       https://cssbuyfind.com/ — searchable finds, category navigation, and QC guidance.
+       https://sopel.fit/cssbuy-spreadsheet — large directory organized around product discovery.
+       https://cssbuyship.com/ — price comparison and shipping as prominent topics.
+       This page pairs static product links with on-page price sorting and listing-specific
+       checks for size, QC and shipping. Sources:
+       https://hipobuyfind.com/ and the item detail pages linked below. -->
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #142720;
+      --muted: #486055;
+      --forest: #102e27;
+      --green: #245e47;
+      --mint: #d9f5b5;
+      --paper: #f5f7ef;
+      --line: #d6dfd5;
+      font-family: "DM Sans", system-ui, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--paper); color: var(--ink); line-height: 1.6; }
+    a { color: var(--green); text-underline-offset: .2em; }
+    :focus-visible { outline: 3px solid #aa5c20; outline-offset: 4px; }
+    [hidden] { display: none !important; }
+    .skip { position: absolute; top: .5rem; left: .5rem; z-index: 2; padding: .65rem; background: white; transform: translateY(-150%); }
+    .skip:focus { transform: translateY(0); }
+    .wrap { width: min(100% - 2rem, 70rem); margin-inline: auto; }
+    header, .hero { background: var(--forest); color: white; }
+    nav { min-height: 4.5rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: .7rem 1.25rem; padding-block: .8rem; }
+    nav a { color: white; font-weight: 650; text-decoration: none; }
+    nav div { display: flex; flex-wrap: wrap; gap: .4rem 1.2rem; }
+    nav div a { color: #d7e8de; font-size: .92rem; }
+    .hero {
+      text-align: center;
+      padding: clamp(3.5rem, 9vw, 8rem) 0;
+      background-image: radial-gradient(ellipse at 50% 120%, #2c6950, transparent 68%);
+    }
+    h1, h2, h3 { line-height: 1.12; }
+    h1 { font-size: clamp(2.7rem, 8vw, 6.6rem); margin: 0; letter-spacing: -.065em; }
+    h2 { font-size: clamp(1.85rem, 4.6vw, 3.25rem); margin: 0 0 .75rem; letter-spacing: -.045em; }
+    h3 { margin: 0 0 .7rem; font-size: 1.2rem; }
+    .hero p { margin: 1.15rem auto 1.65rem; max-width: 48rem; color: #e0eee5; font-size: clamp(1rem, 2vw, 1.2rem); }
+    .actions { display: flex; justify-content: center; flex-wrap: wrap; gap: .7rem; }
+    .button { display: inline-flex; justify-content: center; align-items: center; min-height: 3rem; padding: .65rem 1.2rem; border: 1px solid var(--mint); border-radius: 999px; background: var(--mint); color: var(--forest); font-weight: 750; text-decoration: none; }
+    .button.secondary { background: transparent; color: white; border-color: #b6d2c1; }
+    .button:hover { background: white; color: var(--forest); }
+    .section { padding-block: clamp(2.5rem, 6vw, 4.5rem); }
+    .lead { margin: 0 0 1.3rem; max-width: 48rem; color: var(--muted); }
+    .filters { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: .8rem; margin-block: 1.4rem .5rem; }
+    label { display: grid; gap: .3rem; font-weight: 700; }
+    input, select { width: 100%; min-width: 0; min-height: 2.8rem; padding: .55rem .7rem; border: 1px solid #82968a; border-radius: .6rem; background: white; color: var(--ink); font: inherit; }
+    .status { min-height: 1.6rem; margin-block: .5rem; color: var(--muted); }
+    .table { overflow-x: auto; border: 1px solid var(--line); border-radius: .9rem; background: white; }
+    table { width: 100%; min-width: 34rem; border-collapse: collapse; text-align: left; }
+    th, td { padding: .95rem 1rem; }
+    thead { background: #e5eee4; }
+    tbody tr + tr { border-top: 1px solid var(--line); }
+    tbody th { font-weight: 650; }
+    .price { white-space: nowrap; font-variant-numeric: tabular-nums; }
+    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: .85rem; }
+    .card { padding: 1.25rem; border: 1px solid var(--line); border-radius: .9rem; background: white; }
+    .card p { margin: 0; color: var(--muted); }
+    details { border-bottom: 1px solid var(--line); padding: .9rem 0; }
+    summary { cursor: pointer; font-weight: 750; }
+    details p { margin: .65rem 0 0; max-width: 50rem; color: var(--muted); }
+    footer { padding: 1.5rem 0; background: var(--forest); color: #e0eee5; }
+    footer p { margin: 0; }
+    footer a { color: var(--mint); }
+    @media (max-width: 48rem) {
+      .grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 36rem) {
+      .filters { grid-template-columns: 1fr 1fr; }
+      .filters label:first-child { grid-column: 1 / -1; }
+      th, td { padding: .75rem .6rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+    }
+  </style>
+<link rel="canonical" href="https://kakobuyfinds.github.io/kvign/">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header>
+    <nav class="wrap" aria-label="Main navigation">
+      <a href="#main">CSSBuy spreadsheet</a>
+      <div>
+        <a href="#catalog">Product directory</a>
+        <a href="#buying-guide">Buying guide</a>
+        <a href="#faq">FAQ</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero" aria-labelledby="page-title">
+      <div class="wrap">
+        <h1 id="page-title">CSSBuy spreadsheet</h1>
+        <p>Compare shoes, hoodies, and T-shirts from HipobuyFind, then use the buying checklist to verify your size, review warehouse photos, and estimate parcel costs.</p>
+        <div class="actions">
+          <a class="button" href="https://hipobuyfind.com/" aria-describedby="destination">CSSBuy spreadsheet</a>
+          <a class="button secondary" href="https://hipobuyfind.com/" aria-describedby="destination">Buy it now</a>
+        </div>
+        <small id="destination">Both buttons open the HipobuyFind catalog.</small>
+      </div>
+    </section>
+
+    <section class="wrap section" id="catalog" aria-labelledby="catalog-title">
+      <h2 id="catalog-title">HipobuyFind product directory</h2>
+      <p class="lead" id="price-note">These listings show approximate USD prices from the HipobuyFind catalog. Open the item page to check the current price, available variants, and seller details. Shipping and agent fees are separate.</p>
+      <div id="filters" class="filters" hidden>
+        <label>Find a product
+          <input id="query" type="search" placeholder="Try hoodie or 154936" autocomplete="off">
+        </label>
+        <label>Category
+          <select id="category">
+            <option value="">All categories</option>
+            <option value="Shoes">Shoes</option>
+            <option value="Hoodies">Hoodies</option>
+            <option value="T-shirts">T-shirts</option>
+          </select>
+        </label>
+        <label>Sort by
+          <select id="sort">
+            <option value="featured">Featured order</option>
+            <option value="ascending">Price low to high</option>
+            <option value="descending">Price high to low</option>
+          </select>
+        </label>
+      </div>
+      <p id="results" class="status" role="status" hidden></p>
+      <div class="table" tabindex="0" role="region" aria-labelledby="catalog-title">
+        <table aria-describedby="price-note">
+          <thead>
+            <tr>
+              <th scope="col">Product</th>
+              <th scope="col">Category</th>
+              <th scope="col">Approx. USD</th>
+              <th scope="col">Item ID</th>
+            </tr>
+          </thead>
+          <tbody id="products">
+            <tr data-category="Shoes" data-price="55.56">
+              <th scope="row"><a href="https://hipobuyfind.com/goods-148189.html">Leather Dress Shoes</a></th>
+              <td>Shoes</td><td class="price">$55.56</td><td>148189</td>
+            </tr>
+            <tr data-category="Shoes" data-price="62.50">
+              <th scope="row"><a href="https://hipobuyfind.com/goods-148188.html">Black Canvas Low-Tops with Gum Sole</a></th>
+              <td>Shoes</td><td class="price">$62.50</td><td>148188</td>
+            </tr>
+            <tr data-category="Hoodies" data-price="41.67">
+              <th scope="row"><a href="https://hipobuyfind.com/goods-154936.html">Gray Hoodie</a></th>
+              <td>Hoodies</td><td class="price">$41.67</td><td>154936</td>
+            </tr>
+            <tr data-category="T-shirts" data-price="14.58">
+              <th scope="row"><a href="https://hipobuyfind.com/goods-154920.html">Graphic Short-Sleeve T-Shirt</a></th>
+              <td>T-shirts</td><td class="price">$14.58</td><td>154920</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p><a href="https://hipobuyfind.com/">Browse the full HipobuyFind catalog →</a></p>
+    </section>
+
+    <section class="wrap section" id="buying-guide" aria-labelledby="guide-title">
+      <h2 id="guide-title">What to check before ordering</h2>
+      <div class="grid">
+        <article class="card">
+          <h3>Confirm the listing and size</h3>
+          <p>Open the catalog item and check which seller listing it leads to. For shoes, compare your foot length in centimeters with the seller’s chart. For tops, measure a similar garment flat across the chest and from shoulder to hem, then compare the same measurements.</p>
+        </article>
+        <article class="card">
+          <h3>Review warehouse QC photos</h3>
+          <p>If your agent supplies warehouse photos, compare the item label, color, and selected variant with your order. Ask for a ruler photo if fit depends on one measurement. For shoes, check both size labels and ask for an outsole photo if condition matters.</p>
+        </article>
+        <article class="card">
+          <h3>Estimate the delivered cost</h3>
+          <p>Add the item price, domestic delivery, any agent fees, international freight, and applicable import charges. Check whether the carrier bills by actual or dimensional weight. For boxed shoes, compare the estimated parcel dimensions with and without the box.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="wrap section" id="faq" aria-labelledby="faq-title">
+      <h2 id="faq-title">CSSBuy spreadsheet FAQ</h2>
+      <details>
+        <summary>What is a CSSBuy spreadsheet?</summary>
+        <p>It is a product directory or shortlist used to compare seller listings before ordering through a shopping agent. This independent page brings together selected HipobuyFind listings and checks you can apply before ordering.</p>
+      </details>
+      <details>
+        <summary>How do I check whether I can order a find with CSSBuy?</summary>
+        <p>Open the HipobuyFind detail page and locate the original seller URL if one is provided. Paste that URL into your CSSBuy account to check whether the item and variant are supported. Confirm the total and return terms before paying.</p>
+      </details>
+      <details>
+        <summary>What should I do if a listing is missing the size I want?</summary>
+        <p>Note the item ID and check the original seller page for the color and size combination. If the seller has removed that variant or the link no longer works, compare another listing with a clear size chart and current availability.</p>
+      </details>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <p>Independent shopping guide. Product listings are sourced from <a href="https://hipobuyfind.com/">HipobuyFind</a>.</p>
+    </div>
+  </footer>
+
+  <script>
+    const filters = document.getElementById("filters");
+    const query = document.getElementById("query");
+    const category = document.getElementById("category");
+    const sort = document.getElementById("sort");
+    const products = document.getElementById("products");
+    const results = document.getElementById("results");
+    const rows = Array.from(products.rows);
+
+    function updateCatalog() {
+      const term = query.value.trim().toLowerCase();
+      const orderedRows = [...rows];
+
+      if (sort.value !== "featured") {
+        const direction = sort.value === "ascending" ? 1 : -1;
+        orderedRows.sort((first, second) =>
+          direction * (Number(first.dataset.price) - Number(second.dataset.price))
+        );
+      }
+
+      let visible = 0;
+      for (const row of orderedRows) {
+        const matchesCategory = !category.value || row.dataset.category === category.value;
+        const matchesQuery = row.textContent.toLowerCase().includes(term);
+        row.hidden = !(matchesCategory && matchesQuery);
+        if (!row.hidden) visible += 1;
+      }
+
+      products.append(...orderedRows);
+      results.textContent = visible === 0
+        ? "No matches. Try a different product name or category."
+        : `${visible} of ${rows.length} listings`;
+    }
+
+    query.addEventListener("input", updateCatalog);
+    category.addEventListener("change", updateCatalog);
+    sort.addEventListener("change", updateCatalog);
+    filters.hidden = false;
+    results.hidden = false;
+    updateCatalog();
+  </script>
+</body>
+</html>
